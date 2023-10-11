@@ -30,6 +30,7 @@ public class PatientService {
         try {
             String encryptedPassword=PasswordEncryptor.encryptor(signUpPassword);
 
+            //patient table --> save patient...
             patient.setPatientPassword(encryptedPassword);
              patientRepo.save(patient);
              return "Patient registered";
@@ -38,7 +39,5 @@ public class PatientService {
            return  "Internal Server Issue while Saving Password !! ";
         }
 
-
-        //patient table --> save patient...
     }
 }

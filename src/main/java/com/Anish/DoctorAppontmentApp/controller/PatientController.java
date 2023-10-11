@@ -4,6 +4,7 @@ import com.Anish.DoctorAppontmentApp.model.Patient;
 import com.Anish.DoctorAppontmentApp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +15,7 @@ public class PatientController {
     //Sign Up Code ....
 
     @PostMapping("patient/signup")
-     public String patientSignUp(Patient patient) {
+     public String patientSignUp(@RequestBody Patient patient) {
         return patientService.patientSignUp(patient);
     }
 

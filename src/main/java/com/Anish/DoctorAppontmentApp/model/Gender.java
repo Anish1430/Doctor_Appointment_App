@@ -1,6 +1,10 @@
 package com.Anish.DoctorAppontmentApp.model;
 
-public enum Gender {
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
-    MALE,FEMALE,TRANS
+public enum Gender {
+    MALE,
+    FEMALE,
+    TRANS
 }

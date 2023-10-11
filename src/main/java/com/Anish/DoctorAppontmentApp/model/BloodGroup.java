@@ -1,6 +1,12 @@
 package com.Anish.DoctorAppontmentApp.model;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import org.hibernate.type.descriptor.converter.internal.OrdinalEnumValueConverter;
+
 public enum BloodGroup {
+
     A_POSITIVE("A+"),
     A_NEGATIVE("A-"),
     B_POSITIVE("B+"),

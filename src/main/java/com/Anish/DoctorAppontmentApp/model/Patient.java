@@ -1,9 +1,6 @@
 package com.Anish.DoctorAppontmentApp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,8 +19,13 @@ public class Patient {
     private String patientName;
     private String patientEmail;
     private String patientPassword;
+
+    @Enumerated(EnumType.STRING)
     private Gender patientGender;
+
+    @Enumerated(EnumType.STRING)
     private BloodGroup patientBloodGroup;
+
     private String patientContact;
     private LocalDateTime patientDateOfBirth;
 }
