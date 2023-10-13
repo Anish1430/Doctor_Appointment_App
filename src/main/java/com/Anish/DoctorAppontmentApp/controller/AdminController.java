@@ -35,6 +35,11 @@ public class AdminController {
 
     @GetMapping("patients/bloodGroup/{bloodGroup}")
     public List<Patient> getAllPatientsByBloodGroup(@PathVariable BloodGroup bloodGroup) {
-        return patientService.getAllPatientsByBloodGroup(bloodGroup);
+        List<Patient>  patients=patientService.getAllPatientsByBloodGroup(bloodGroup);
+
+        for (Patient patient : patients) {
+             patient.setAppointments(null);
+        }
+        return patients;
     }
 }

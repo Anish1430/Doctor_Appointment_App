@@ -1,15 +1,21 @@
 package com.Anish.DoctorAppontmentApp.controller;
 
+import com.Anish.DoctorAppontmentApp.model.Doctor;
 import com.Anish.DoctorAppontmentApp.model.Patient;
+import com.Anish.DoctorAppontmentApp.model.Qualification;
+import com.Anish.DoctorAppontmentApp.model.Specialization;
 import com.Anish.DoctorAppontmentApp.model.dto.AuthenticationInputDto;
 import com.Anish.DoctorAppontmentApp.model.dto.ScheduledAppointmentDTO;
 import com.Anish.DoctorAppontmentApp.model.dto.SignInInputDto;
 import com.Anish.DoctorAppontmentApp.service.AppointmentService;
+import com.Anish.DoctorAppontmentApp.service.DoctorService;
 import com.Anish.DoctorAppontmentApp.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Validated
 @RestController
@@ -19,6 +25,9 @@ public class PatientController {
 
     @Autowired
     AppointmentService appointmentService;
+
+    @Autowired
+    DoctorService doctorService;
 
     //Sign Up Code ....
 
@@ -57,4 +66,10 @@ public class PatientController {
         return appointmentService.cancelAppointment(authInfo,appointmentId);
     }
 
+
+    @GetMapping("doctors/qualification/{qual}/or/specialization/{spec}")
+
+    public List<Doctor> getDoctorsByQualificationOrSpec(Qualification qual, Specialization spec) {
+      return doctorService.getDoctorsByQualificationOrSpec(qual,spec);
+    }
 }

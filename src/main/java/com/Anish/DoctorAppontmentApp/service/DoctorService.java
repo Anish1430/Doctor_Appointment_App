@@ -1,12 +1,16 @@
 package com.Anish.DoctorAppontmentApp.service;
 
 import com.Anish.DoctorAppontmentApp.model.Doctor;
+import com.Anish.DoctorAppontmentApp.model.Patient;
+import com.Anish.DoctorAppontmentApp.model.Qualification;
+import com.Anish.DoctorAppontmentApp.model.Specialization;
 import com.Anish.DoctorAppontmentApp.model.dto.AuthenticationInputDto;
 import com.Anish.DoctorAppontmentApp.repository.DoctorRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorService {
@@ -40,4 +44,15 @@ public class DoctorService {
 
       return doctorRepo.findById(id).orElseThrow();
     }
+
+    public List<Doctor> getDoctorsByQualificationOrSpec(Qualification qual, Specialization spec) {
+            List<Doctor> doctors = doctorRepo.findByDocQualificationOrDocSpecialization(qual, spec);
+
+            return doctors.stream().map(doc -> {
+                        doc.setAppointments(null);
+                        return doc;
+                    })
+
+                    .collect(Collectors.toList());
+        }
 }
