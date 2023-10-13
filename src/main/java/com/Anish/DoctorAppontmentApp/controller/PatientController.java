@@ -49,10 +49,9 @@ public class PatientController {
 
   //Cancel An Appointment...
 
-    @DeleteMapping("patient/appointment/cancel")
+    @DeleteMapping("patient/appointment/{appointmentId}/cancel")
     public String cancelAppointment(@RequestBody AuthenticationInputDto authInfo, @PathVariable Integer appointmentId) {
         return appointmentService.cancelAppointment(authInfo,appointmentId);
     }
-
 
 }

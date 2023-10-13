@@ -59,10 +59,18 @@ public class AppointmentService {
     //Cancel Appointment Code......
 
     public String cancelAppointment(AuthenticationInputDto authInfo, Integer appointmentId) {
+
         if (pTokenService.authenticate(authInfo)) {
             String email=authInfo.getEmail();
             Patient patient=patientRepo.findFirstByPatientEmail(email);
             Appointment existingAppointment=appointmentRepo.findById(appointmentId).orElseThrow();
+
+            if (existingAppointment.getPatient().equals(patient)) {
+                  appointmentRepo.deleteById(appointmentId);
+                  return "Appointment with " + existingAppointment.getDoctor().getDocName()+" has been cancelled";
+            }else {
+                 return "Cancel Appointment";
+            }
         }else {
             return "Un Authenticated Access !!!";
         }
