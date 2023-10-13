@@ -1,5 +1,6 @@
 package com.Anish.DoctorAppontmentApp.service;
 
+import com.Anish.DoctorAppontmentApp.model.BloodGroup;
 import com.Anish.DoctorAppontmentApp.model.Doctor;
 import com.Anish.DoctorAppontmentApp.model.Patient;
 import com.Anish.DoctorAppontmentApp.model.PatientAuthenticationToken;
@@ -101,5 +102,9 @@ public class PatientService {
 
     public List<Patient> getAllpatients() {
           return patientRepo.findAll();
+    }
+
+    public List<Patient> getAllPatientsByBloodGroup(BloodGroup bloodGroup) {
+        return patientRepo.findByPatientBloodGroup(bloodGroup);
     }
 }
