@@ -65,9 +65,15 @@ public class PatientService {
             if (existingPatient.getPatientPassword().equals(encryptedPassword)) {
 
                 //return a token for this Sign In..
+
                 PatientAuthenticationToken token=new PatientAuthenticationToken(existingPatient);
-                pTokenService.createToken(token);
-                return token.getTokenValue();
+
+               if (EmailService.sendMail(email,"Otp after login",token.getTokenValue())) {
+                   pTokenService.createToken(token);
+                   return "check Email for otp/token";
+               }else  {
+                   return "Error while generating Token !!!";
+               }
 
             }else {
                 //Password was wrong
@@ -78,7 +84,7 @@ public class PatientService {
             //patient table --> save patient...
 
         } catch (NoSuchAlgorithmException e) {
-            return  "Internal Server Issue while Saving Password !! ";
+            return  "Internal Server Issue while Saving Password, try again later !! ";
         }
 
     }

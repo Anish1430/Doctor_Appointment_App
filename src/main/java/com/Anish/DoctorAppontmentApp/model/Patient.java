@@ -3,6 +3,9 @@ package com.Anish.DoctorAppontmentApp.model;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +26,10 @@ public class Patient {
     private Integer patientId;
 
     private String patientName;
+    @Email
     private String patientEmail;
+
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$\n")
     private String patientPassword;
 
     @Enumerated(EnumType.STRING)
@@ -32,6 +38,8 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroup patientBloodGroup;
 
+    @Size(min = 10, max = 10)
+    @Pattern(regexp = "\\d+")
     private String patientContact;
     private LocalDateTime patientDateOfBirth;
 

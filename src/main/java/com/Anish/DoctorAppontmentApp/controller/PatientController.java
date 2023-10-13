@@ -6,9 +6,12 @@ import com.Anish.DoctorAppontmentApp.model.dto.ScheduledAppointmentDTO;
 import com.Anish.DoctorAppontmentApp.model.dto.SignInInputDto;
 import com.Anish.DoctorAppontmentApp.service.AppointmentService;
 import com.Anish.DoctorAppontmentApp.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+@Validated
 @RestController
 public class PatientController {
     @Autowired
@@ -20,7 +23,7 @@ public class PatientController {
     //Sign Up Code ....
 
     @PostMapping("patient/signUp")
-     public String patientSignUp(@RequestBody Patient patient) {
+     public String patientSignUp(@Valid @RequestBody Patient patient) {
         return patientService.patientSignUp(patient);
     }
 

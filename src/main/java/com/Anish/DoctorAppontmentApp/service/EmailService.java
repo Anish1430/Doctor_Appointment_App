@@ -10,7 +10,7 @@ public class EmailService {
     public static final String EMAIL_USERNAME = "anish.kumar20071998@gmail.com";
     public static final String EMAIL_PASSWORD = "vpxw tzhn dpkg uwtl";
 
-    public static void sendMail(String toEmail, String subject, String body) throws MessagingException {
+    public static boolean sendMail(String toEmail, String subject, String body){
         Properties sysproperties = new Properties();
 
         sysproperties.put("mail.smtp.host", "smtp.gmail.com");  // SMTP SERVER
@@ -32,8 +32,11 @@ public class EmailService {
             mailMessage.setText(body);
             Transport.send(mailMessage);
             System.out.println("OTP sent Successfully to " + toEmail);
+
+            return true;
         } catch (MessagingException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
