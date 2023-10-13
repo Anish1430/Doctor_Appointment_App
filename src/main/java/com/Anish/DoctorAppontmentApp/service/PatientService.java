@@ -1,5 +1,6 @@
 package com.Anish.DoctorAppontmentApp.service;
 
+import com.Anish.DoctorAppontmentApp.model.Doctor;
 import com.Anish.DoctorAppontmentApp.model.Patient;
 import com.Anish.DoctorAppontmentApp.model.PatientAuthenticationToken;
 import com.Anish.DoctorAppontmentApp.model.dto.AuthenticationInputDto;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 public class PatientService {
@@ -89,5 +91,9 @@ public class PatientService {
         }else {
             return "un Authentication Access !!!";
         }
+    }
+
+    public List<Patient> getAllpatients() {
+          return patientRepo.findAll();
     }
 }
