@@ -7,10 +7,7 @@ import com.Anish.DoctorAppontmentApp.model.dto.SignInInputDto;
 import com.Anish.DoctorAppontmentApp.service.AppointmentService;
 import com.Anish.DoctorAppontmentApp.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PatientController {
@@ -49,5 +46,13 @@ public class PatientController {
     public String scheduleAppointment(@RequestBody ScheduledAppointmentDTO scheduledAppointmentDTO){
         return  appointmentService.scheduleAppointment(scheduledAppointmentDTO.getAuthInfo(),scheduledAppointmentDTO.getAppointment());
     }
+
+  //Cancel An Appointment...
+
+    @DeleteMapping("patient/appointment/cancel")
+    public String cancelAppointment(@RequestBody AuthenticationInputDto authInfo, @PathVariable Integer appointmentId) {
+        return appointmentService.cancelAppointment(authInfo,appointmentId);
+    }
+
 
 }

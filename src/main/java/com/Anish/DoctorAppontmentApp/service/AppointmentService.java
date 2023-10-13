@@ -30,9 +30,11 @@ public class AppointmentService {
     public String scheduleAppointment(AuthenticationInputDto authInfo, Appointment appointment) {
         if (pTokenService.authenticate(authInfo)) {
            //Find the patient.....
+
             String email=authInfo.getEmail();
             Patient patient=patientRepo.findFirstByPatientEmail(email);
-           appointment.setPatient(patient);
+              appointment.setPatient(patient);
+
             //Find the Doctor....
 
             Integer docId=appointment.getDoctor().getDocId();
@@ -49,6 +51,18 @@ public class AppointmentService {
                 return "Doctor does not exist, Could not Book Appointment !!!";
             }
 
+        }else {
+            return "Un Authenticated Access !!!";
+        }
+    }
+
+    //Cancel Appointment Code......
+
+    public String cancelAppointment(AuthenticationInputDto authInfo, Integer appointmentId) {
+        if (pTokenService.authenticate(authInfo)) {
+            String email=authInfo.getEmail();
+            Patient patient=patientRepo.findFirstByPatientEmail(email);
+            Appointment existingAppointment=appointmentRepo.findById(appointmentId).orElseThrow();
         }else {
             return "Un Authenticated Access !!!";
         }
