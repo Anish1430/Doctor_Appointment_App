@@ -24,15 +24,15 @@ public class DoctorService {
     public List<Doctor> getAllDoctors(AuthenticationInputDto authInfo) {
         if (pTokenService.authenticate(authInfo)) {
             return doctorRepo.findAll();
-        }else {
+        } else {
             return null;
         }
     }
 
     public String addDoctor(Doctor newDoctor) {
-        Integer docId= newDoctor.getDocId();
+        Integer docId = newDoctor.getDocId();
 
-        if(docId != null  && doctorRepo.existsById(docId)) {
+        if (docId != null && doctorRepo.existsById(docId)) {
             return "Doctor Already exist";
         }
         newDoctor.setAppointments(null); //Linking anyway does not happen from fk side
@@ -42,10 +42,12 @@ public class DoctorService {
 
     public Doctor getDoctorById(Integer id) {
 
-      return doctorRepo.findById(id).orElseThrow();
+        return doctorRepo.findById(id).orElseThrow();
     }
 
-    public List<Doctor> getDoctorsByQualificationOrSpec(Qualification qual, Specialization spec) {
+    public List<Doctor> getDoctorsByQualificationOrSpec(AuthenticationInputDto authInfo, Qualification qual, Specialization spec) {
+        if (pTokenService.authenticate(authInfo)) {
+
             List<Doctor> doctors = doctorRepo.findByDocQualificationOrDocSpecialization(qual, spec);
 
             return doctors.stream().map(doc -> {
@@ -54,5 +56,9 @@ public class DoctorService {
                     })
 
                     .collect(Collectors.toList());
+        }  else  {
+            return null;
         }
+
+    }
 }

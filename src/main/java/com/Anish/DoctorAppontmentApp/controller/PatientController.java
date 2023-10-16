@@ -66,10 +66,9 @@ public class PatientController {
         return appointmentService.cancelAppointment(authInfo,appointmentId);
     }
 
-
     @GetMapping("doctors/qualification/{qual}/or/specialization/{spec}")
 
-    public List<Doctor> getDoctorsByQualificationOrSpec(Qualification qual, Specialization spec) {
-      return doctorService.getDoctorsByQualificationOrSpec(qual,spec);
+    public List<Doctor> getDoctorsByQualificationOrSpec(@RequestBody AuthenticationInputDto authInfo,@PathVariable Qualification qual, @PathVariable Specialization spec) {
+      return doctorService.getDoctorsByQualificationOrSpec(authInfo,qual,spec);
     }
 }
